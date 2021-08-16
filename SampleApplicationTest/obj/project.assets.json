@@ -6400,11 +6400,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\utkarshgoyal\\Documents\\sampleKubernetes\\SampleApplicationTest\\SampleApplicationTest.csproj",
+      "projectUniqueName": "C:\\Users\\utkarshgoyal\\Desktop\\demo_devops\\SampleApplicationTest\\SampleApplicationTest.csproj",
       "projectName": "SampleApplicationTest",
-      "projectPath": "C:\\Users\\utkarshgoyal\\Documents\\sampleKubernetes\\SampleApplicationTest\\SampleApplicationTest.csproj",
+      "projectPath": "C:\\Users\\utkarshgoyal\\Desktop\\demo_devops\\SampleApplicationTest\\SampleApplicationTest.csproj",
       "packagesPath": "C:\\Users\\utkarshgoyal\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\utkarshgoyal\\Documents\\sampleKubernetes\\SampleApplicationTest\\obj\\",
+      "outputPath": "C:\\Users\\utkarshgoyal\\Desktop\\demo_devops\\SampleApplicationTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\utkarshgoyal\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6424,8 +6424,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\utkarshgoyal\\Documents\\sampleKubernetes\\SampleWebApp\\SampleWebApp.csproj": {
-              "projectPath": "C:\\Users\\utkarshgoyal\\Documents\\sampleKubernetes\\SampleWebApp\\SampleWebApp.csproj"
+            "C:\\Users\\utkarshgoyal\\Desktop\\demo_devops\\SampleWebApp\\SampleWebApp.csproj": {
+              "projectPath": "C:\\Users\\utkarshgoyal\\Desktop\\demo_devops\\SampleWebApp\\SampleWebApp.csproj"
             }
           }
         }
