@@ -1,5 +1,5 @@
 pipeline{
-    agent:any
+    agent any
     environment{
       scannerHome = tool name:'SonarQubeScanner'
       username = 'utkarshgoyal'
