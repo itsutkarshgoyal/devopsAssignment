@@ -24,7 +24,7 @@ pipeline{
        stage("Start SonarQube"){
            steps{
                withSonarQubeEnv("Test_sonar"){
-                   bat "${scannerHome}/SonarScanner.MSBuild.exe begin /k: SampleWebApp/ /d:sonar.cs.opencober.reportsPaths=Coverge.opencover.xml"
+                   bat "${scannerHome}/SonarScanner.MSBuild.exe begin /k:SampleWebApp /d:sonar.cs.opencover.reportsPaths=coverge.opencover.xml"
 
                }
            }
