@@ -17,7 +17,7 @@ pipeline{
         stage("Nuget Restore"){
             steps{
                 echo "Nuget Retore"
-                bat "dotnet nuget restore"
+                bat "dotnet restore"
             }
         }
 
