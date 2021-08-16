@@ -10,7 +10,7 @@ pipeline {
 	   cluster_name = 'cluster-1'
 	   location = 'us-central1-c'
 	   credentials_id = 'TestJenkinsApi'
-	   project_id = 'spheric-gearing-323104
+	   project_id = 'spheric-gearing-323104'
 	}
 	options {
 		  // prepend all console output generated during statges  
