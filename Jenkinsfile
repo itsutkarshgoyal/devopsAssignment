@@ -4,13 +4,13 @@ pipeline {
     environment {
 	   scannerHome = tool name: 'SonarQubeScanner'
 	   registry = 'utkarshgoyal/samplekubernetes'
-	   docker_port = "${env.BRANCH_NAME == 'master'?7200: 7300}"
+	   docker_port = "7200"
 	   username = 'utkarshgoyal'
-	   container_name = "c-utkarshgoyal-${env.BRANCH_NAME}"
+	   container_name = "c-utkarshgoyal"
 	   cluster_name = 'cluster-1'
 	   location = 'us-central1-c'
 	   credentials_id = 'TestJenkinsApi'
-	   project_id = 'grand-sphere-321608'
+	   project_id = 'spheric-gearing-323104
 	}
 	options {
 		  // prepend all console output generated during statges  
@@ -45,9 +45,6 @@ pipeline {
 	   }
 	   
  	   stage('Start sonarqube analysis'){
-	        when {
-                expression { env.BRANCH_NAME == 'master' }
-            }
 	     steps {
 		     echo "Start sonarqube analysis step"
 			 withSonarQubeEnv('Test_Sonar'){
@@ -71,9 +68,6 @@ pipeline {
 	   }
 	   
 	   stage('Release artifact') {
-	   	        when {
-                expression { env.BRANCH_NAME == 'develop' }
-            }
             steps {
                 echo 'release artifact'
                 bat 'dotnet publish -c Release'
@@ -81,9 +75,6 @@ pipeline {
         }
 	   
 	   stage('Stop sonarqube analysis'){
-	   	     when {
-                expression { env.BRANCH_NAME == 'master' }
-            }
 	      steps {
 		     echo "Stop analysis"
 			 withSonarQubeEnv('Test_Sonar'){
@@ -96,7 +87,7 @@ pipeline {
 	    steps {
 		  echo "Docker Image Step"
 		  bat 'dotnet publish -c Release'
-		  bat "docker build -t i-${username}-${BRANCH_NAME} --no-cache -f Dockerfile ."
+		  bat "docker build -t i-${username} --no-cache -f Dockerfile ."
 		}
 	   }
 	   
@@ -130,12 +121,12 @@ pipeline {
 				 steps {
 					 echo "Move Image to Docker Hub"
 					 echo env.containerId
-					 bat "docker tag i-${username}-${BRANCH_NAME} ${registry}:${BUILD_NUMBER}"
-					 bat "docker tag i-${username}-${BRANCH_NAME} ${registry}:latest-${BRANCH_NAME}"
+					 bat "docker tag i-${username} ${registry}:${BUILD_NUMBER}"
+					 bat "docker tag i-${username} ${registry}:latest"
 					 
 					 withDockerRegistry([credentialsId: 'DockerHub', url:""]){	  
 					   bat "docker push  ${registry}:${BUILD_NUMBER}"
-					   bat "docker push  ${registry}:latest-${BRANCH_NAME}"
+					   bat "docker push  ${registry}:latest"
 					 }
 				  }
 			  }
@@ -151,8 +142,8 @@ pipeline {
 	   
 	   stage('Kubernetes Deployment'){
 		 steps{
-		   bat " gcloud auth activate-service-account --key-file=grand-sphere-321608-91ff9a48b2a5.json"
-		   bat "gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project grand-sphere-321608"
+		   bat " gcloud auth activate-service-account --key-file=spheric-gearing-323104-ff86861a0738.json"
+		   bat "gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project spheric-gearing-323104-ff86861a0738"
 		   bat "kubectl apply -f deployment.yaml"
 		 }
 	   }	   
