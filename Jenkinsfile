@@ -3,6 +3,9 @@ pipeline{
     environment{
       scannerHome = tool name:'SonarQubeScanner'
       username = 'utkarshgoyal'
+      registry = 'utkarshgoyal/devopsassignment'
+      container_name = 'utkarshgoyal'
+
 
     }
     
@@ -32,7 +35,8 @@ pipeline{
         stage("Build"){
             steps{
                 echo "build"
-                bat "dotnet build -c Release -o SampleWebApp/app/build/SampleWebApp.csproj"
+                bat "dotnet clean"
+                bat "dotnet build -c Release -o SampleWebApp/app/build"
             }
         }
 
@@ -75,6 +79,27 @@ pipeline{
                        echo "previous id not found"
                    }
                }
+           }
+       }
+
+       stage("docker push"){
+           steps{
+           bat "docker tag {username} ${registry}/:latest"
+           bat "docker push ${registry}/:latest"
+           }
+       }
+
+       stage("docker run"){
+           steps{
+               bat "docker run --name ${container_name} -d p :80"
+           }
+       }
+
+       stage("k8 deploy"){
+           steps{
+               bat "gcloud auth activate-service-account --key-file=spheric-gearing-323104-ff86861a0738.json"
+               bat "gcloud container cluster get-credentials cluster-1 -zone us-central1-c-- spheric-gearing-323104-ff86861a0738"
+               bat "kubectl apply -f deployment.yaml"
            }
        }
     }
