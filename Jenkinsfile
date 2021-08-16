@@ -64,7 +64,7 @@ pipeline{
            steps{
                script{
                    String dockerCommand = "docker ps -a -q -f name=${container_name}"
-                   String command = "${bat( return Stdout:true, script:dockerCommand)}"
+                   String command = "${bat(returnStdout:true, script:dockerCommand)}"
                    String previous_id= "${command.trim().readLines().drop(1).join('')}"
                    if(previous_id !=""){
                        echo "previous id found ${previous_id}"
